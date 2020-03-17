@@ -28,10 +28,10 @@ class Movie
     /** @var int */
     private $priceCode;
 
-    public function __construct($title,$price_code)
+    public function __construct($title,$priceCode)
     {
         $this->title = $title;
-        $this->priceCode = $price_code;
+        $this->priceCode = $priceCode;
     }
 
     /**

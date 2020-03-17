@@ -29,7 +29,7 @@ class Rental
     /**
      * @return int
      */
-    public function getDayRented()
+    public function getDaysRented()
     {
         return $this->dayRented;
     }

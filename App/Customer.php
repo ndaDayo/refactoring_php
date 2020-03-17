@@ -20,7 +20,7 @@ class Customer
      */
     public function addRental(Rental $rental)
     {
-        $this->rentals[] = $rental;
+        $this->rental[] = $rental;
     }
 
     /**
@@ -36,11 +36,10 @@ class Customer
         $totalAmount = 0;
         $frequentRenterPoint = 0;
 
-        $result = "Rental Point for" + $this->getName() + '\n';
+        $result = 'Rental Point for ' . $this->getName() . "\n";
 
         foreach ($this->rental as $rental) {
             $thisAmount = 0;
-
             switch ($rental->getMovie()->getPriceCode()) {
                 case Movie::REGULAR:
                     $thisAmount += 2;
