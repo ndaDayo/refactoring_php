@@ -27,6 +27,8 @@ class Rental
     }
 
     /**
+     * レンタルしたビデオの名前を返す
+     *
      * @return Movie
      */
     public function getMovie()
@@ -35,6 +37,8 @@ class Rental
     }
 
     /**
+     * レンタル泊数を返す
+     *
      * @return int
      */
     public function getDaysRented()
@@ -42,6 +46,11 @@ class Rental
         return $this->dayRented;
     }
 
+    /**
+     * ビデオのカテゴリに応じてレンタルポイントを返す
+     *
+     * @return float|int
+     */
     public function getCharge()
     {
         $result = 0;
@@ -63,5 +72,19 @@ class Rental
                 break;
         }
         return $result;
+    }
+
+    /**
+     * 新作を２日以上借りた場合は、ボーナスポイント
+     *
+     * @return int
+     */
+    public function getFrequentRentalPoint()
+    {
+        if (($this->getMovie()->getPriceCode() === Movie::NEW_RELEASE) && $this->getDaysRented() > 1) {
+            return $frequentRentalPoints = 2;
+        } else {
+            return $frequentRentalPoints = 1;
+        }
     }
 }

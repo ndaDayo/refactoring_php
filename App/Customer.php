@@ -34,25 +34,21 @@ class Customer
     public function statement()
     {
         $totalAmount = 0;
-        $frequentRenterPoint = 0;
+        $frequentRentalPoints = 0;
 
         $result = 'Rental Point for ' . $this->getName() . "\n";
 
         foreach ($this->rentals as $rental) {
 
-            // レンタルポイントを加算する
-            $frequentRenterPoint++;
-            // 新作を２日以上借りた場合は、ボーナスポイント
-            if (($rental->getMovie()->getPriceCode() === Movie::NEW_RELEASE) && $rental->getDaysRented() > 1) {
-                $frequentRenterPoint++;
-            }
+            $frequentRentalPoints = $rental->getFrequentRentalPoint();
             // 貸し出しに関する数値の表示
             $result .= "\t" . $rental->getMovie()->getTitle() . "\t" . $rental->getCharge() . "\n";
             $totalAmount += $rental->getCharge();
         }
         $result .= 'Amount owed is ' . $totalAmount . "\n";
-        $result .= 'You earned ' . $frequentRenterPoint . ' frequent renter points' . "\n";
+        $result .= 'You earned ' . $frequentRentalPoints . ' frequent renter points' . "\n";
 
         return $result;
     }
+
 }
