@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Movie;
+
 class Rental
 {
     /**
@@ -12,6 +14,12 @@ class Rental
     /** @var int */
     private $dayRented;
 
+    /**
+     * Rental constructor.
+     *
+     * @param Movie $movie
+     * @param       $dayRented
+     */
     public function __construct(Movie $movie, $dayRented)
     {
         $this->movie = $movie;
@@ -32,5 +40,28 @@ class Rental
     public function getDaysRented()
     {
         return $this->dayRented;
+    }
+
+    public function amountFor()
+    {
+        $result = 0;
+        switch ($this->getMovie()->getPriceCode()) {
+            case Movie::REGULAR:
+                $result += 2;
+                if ($this->getDaysRented() > 2) {
+                    $result += ($this->getDaysRented() - 2) * 1.5;
+                }
+                break;
+            case Movie::NEW_RELEASE:
+                $result += $this->getDaysRented() * 3;
+                break;
+            case Movie::CHILD:
+                $result += 1.5;
+                if ($this->getDaysRented() > 3) {
+                    $result += ($this->getDaysRented() - 3) * 1.5;
+                }
+                break;
+        }
+        return $result;
     }
 }
