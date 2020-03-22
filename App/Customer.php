@@ -33,22 +33,32 @@ class Customer
 
     public function statement()
     {
-        $totalAmount = 0;
-        $frequentRentalPoints = 0;
-
         $result = 'Rental Point for ' . $this->getName() . "\n";
 
         foreach ($this->rentals as $rental) {
-
-            $frequentRentalPoints = $rental->getFrequentRentalPoint();
-            // 貸し出しに関する数値の表示
-            $result .= "\t" . $rental->getMovie()->getTitle() . "\t" . $rental->getCharge() . "\n";
-            $totalAmount += $rental->getCharge();
+            $result .= "\t" . $rental->getMovie()->getTitle() . "\t" . $this->getTotalCharge() . "\n";
         }
-        $result .= 'Amount owed is ' . $totalAmount . "\n";
-        $result .= 'You earned ' . $frequentRentalPoints . ' frequent renter points' . "\n";
+        $result .= 'Amount owed is ' . $this->getTotalCharge() . "\n";
+        $result .= 'You earned ' . $this->getTotalFrequentRentalPoint() . ' frequent renter points' . "\n";
 
         return $result;
     }
 
+    private function getTotalCharge()
+    {
+        $result = 0;
+        foreach ($this->rentals as $rental) {
+            $result = $rental->getCharge();
+        }
+        return $result;
+    }
+
+    private function getTotalFrequentRentalPoint()
+    {
+        $result = 0;
+        foreach ($this->rentals as $rental) {
+            $result = $rental->getFrequentRentalPoint();
+        }
+        return $result;
+    }
 }
