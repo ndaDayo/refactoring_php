@@ -42,7 +42,6 @@ class Customer
             $thisAmount = $this->amountFor($rental);
             // レンタルポイントを加算する
             $frequentRenterPoint++;
-
             // 新作を２日以上借りた場合は、ボーナスポイント
             if (($rental->getMovie()->getPriceCode() === Movie::NEW_RELEASE) && $rental->getDaysRented() > 1) {
                 $frequentRenterPoint++;
