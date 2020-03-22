@@ -40,8 +40,6 @@ class Customer
 
         foreach ($this->rental as $rental) {
             $thisAmount = $this->amountFor($rental);
-
-            var_dump($thisAmount);
             // レンタルポイントを加算する
             $frequentRenterPoint++;
 
@@ -59,26 +57,26 @@ class Customer
         return $result;
     }
 
-    public function amountFor($rental)
+    public function amountFor(Rental $rental)
     {
-        $thisAmount = 0;
+        $result = 0;
         switch ($rental->getMovie()->getPriceCode()) {
             case Movie::REGULAR:
-                $thisAmount += 2;
+                $result += 2;
                 if ($rental->getDaysRented() > 2) {
-                    $thisAmount += ($rental->getDaysRented() - 2) * 1.5;
+                    $result += ($rental->getDaysRented() - 2) * 1.5;
                 }
                 break;
             case Movie::NEW_RELEASE:
-                $thisAmount += $rental->getDaysRented() * 3;
+                $result += $rental->getDaysRented() * 3;
                 break;
             case Movie::CHILD:
-                $thisAmount += 1.5;
+                $result += 1.5;
                 if ($rental->getDaysRented() > 3) {
-                    $thisAmount += ($rental->getDaysRented() - 3) * 1.5;
+                    $result += ($rental->getDaysRented() - 3) * 1.5;
                 }
                 break;
         }
-        return $thisAmount;
+        return $result;
     }
 }
