@@ -2,6 +2,11 @@
 
 namespace App;
 
+use App\Price\ChildrenPrice;
+use App\Price\NewReleasePrice;
+use App\Price\Price;
+use App\Price\RegularPrice;
+
 class Movie
 {
     /** 一般向け
@@ -25,10 +30,12 @@ class Movie
     /** @var string */
     private $title;
 
-    /** @var int */
-    private $priceCode;
+    /**
+     * @var Price
+     */
+    private $price;
 
-    public function __construct($title,$priceCode)
+    public function __construct($title, $priceCode)
     {
         $this->title = $title;
         $this->setPriceCode($priceCode);
@@ -55,15 +62,31 @@ class Movie
      */
     public function getPriceCode()
     {
-        return $this->priceCode;
+        return $this->price->getPriceCode();
     }
 
     /**
+     * 料金コードをセット
+     *
      * @param $arg
      */
     public function setPriceCode($arg)
     {
-        $this->priceCode = $arg;
+        $this->price = $arg;
+
+        switch ($arg) {
+            case Movie::REGULAR:
+                $this->price = new RegularPrice();
+                break;
+            case Movie::NEW_RELEASE:
+                $this->price = new NewReleasePrice();
+                break;
+            case Movie::CHILD:
+                $this->price = new ChildrenPrice();
+                break;
+            default:
+                throw new \InvalidArgumentException('不正な料金コード');
+        }
     }
 
     /**
@@ -74,25 +97,7 @@ class Movie
      */
     public function getCharge($dayRented)
     {
-        $result = 0;
-        switch ($this->getPriceCode()) {
-            case Movie::REGULAR:
-                $result += 2;
-                if ($dayRented > 2) {
-                    $result += ($dayRented - 2) * 1.5;
-                }
-                break;
-            case Movie::NEW_RELEASE:
-                $result += $dayRented * 3;
-                break;
-            case Movie::CHILD:
-                $result += 1.5;
-                if ($dayRented > 3) {
-                    $result += ($dayRented - 3) * 1.5;
-                }
-                break;
-        }
-        return $result;
+       return $this->price->getCharge($dayRented);
     }
 
     /**
