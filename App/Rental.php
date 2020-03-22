@@ -42,7 +42,7 @@ class Rental
         return $this->dayRented;
     }
 
-    public function amountFor()
+    public function getCharge()
     {
         $result = 0;
         switch ($this->getMovie()->getPriceCode()) {

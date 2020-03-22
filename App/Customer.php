@@ -8,7 +8,7 @@ class Customer
     private $name;
 
     /** @var array */
-    private $rental = [];
+    private $rentals = [];
 
     public function __construct($name)
     {
@@ -20,7 +20,7 @@ class Customer
      */
     public function addRental(Rental $rental)
     {
-        $this->rental[] = $rental;
+        $this->rentals[] = $rental;
     }
 
     /**
@@ -38,8 +38,8 @@ class Customer
 
         $result = 'Rental Point for ' . $this->getName() . "\n";
 
-        foreach ($this->rental as $rental) {
-            $thisAmount = $rental->amountFor();
+        foreach ($this->rentals as $rental) {
+
             // レンタルポイントを加算する
             $frequentRenterPoint++;
             // 新作を２日以上借りた場合は、ボーナスポイント
@@ -47,8 +47,8 @@ class Customer
                 $frequentRenterPoint++;
             }
             // 貸し出しに関する数値の表示
-            $result .= "\t" . $rental->getMovie()->getTitle() . "\t" . $thisAmount . "\n";
-            $totalAmount += $thisAmount;
+            $result .= "\t" . $rental->getMovie()->getTitle() . "\t" . $rental->getCharge() . "\n";
+            $totalAmount += $rental->getCharge();
         }
         $result .= 'Amount owed is ' . $totalAmount . "\n";
         $result .= 'You earned ' . $frequentRenterPoint . ' frequent renter points' . "\n";
