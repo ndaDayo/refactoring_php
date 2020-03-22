@@ -24,4 +24,13 @@ class NewReleasePrice extends Price
     {
         return $dayRented * 3;
     }
+
+    /**
+     * @param $dayRented
+     * @return int
+     */
+    public function getFrequentRentalPoint($dayRented)
+    {
+        return ($dayRented > 1) ? 2 : 1;
+    }
 }
