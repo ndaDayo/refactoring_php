@@ -16,12 +16,18 @@ class RegularPrice extends Price
        return Movie::REGULAR;
     }
 
+    /**
+     * @param $dayRented
+     * @return float|int|mixed
+     */
     public function getCharge($dayRented)
     {
         $result = 2;
+
         if ($dayRented > 2) {
             $result += ($dayRented - 2) * 1.5;
         }
+
         return $result;
     }
 }
