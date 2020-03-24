@@ -40,13 +40,13 @@ class RegularTest extends PHPUnit_Framework_TestCase
     {
         // レンタル泊数が２日以下の場合
         $this->dayRented = 2;
-        $expected_within2days = 2;
-        $this->assertEquals($expected_within2days, $this->regularPrice->getCharge($this->dayRented));
+        $expectedWithin2days = 2;
+        $this->assertEquals($expectedWithin2days, $this->regularPrice->getCharge($this->dayRented));
 
         // レンタル泊数が３日以上の場合
         $this->dayRented = 3;
-        $result = 2;
-        $expectedOver2days = ($this->dayRented - 2) * 1.5 + $result;
+        $within2daysCharge = 2;
+        $expectedOver2days = ($this->dayRented - 2) * 1.5 + $within2daysCharge;
         $this->assertEquals($expectedOver2days, $this->regularPrice->getCharge($this->dayRented));
     }
 }
