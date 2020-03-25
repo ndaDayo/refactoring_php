@@ -4,19 +4,29 @@ use App\Movie;
 
 class MovieTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Movie
-     */
-    protected $regularMovie;
+    /** @var Movie 一般向け映画 */
+    private $regularMovie;
+
+    /** @var Movie 新作映画 */
+    private $newReleaseMovie;
+
+    /** @var Movie 子供向け映画 */
+    private $childMovie;
 
     protected function setUp()
     {
-        $this->regularMovie = new Movie('一般向けテストタイトル', Movie::REGULAR);
+        $this->regularMovie = new Movie('一般向け映画', Movie::REGULAR);
+        $this->newReleaseMovie = new Movie('新作映画', Movie::NEW_RELEASE);
+        $this->childMovie = new Movie('子供向け映画', Movie::CHILD);
     }
 
-    public function testSetPriceCode()
+    /**
+     *　@test
+     */
+    public function 料金コードをセットする()
     {
-        $expectedRegular = Movie::REGULAR;
-        $this->assertEquals($expectedRegular, $this->regularMovie->getPriceCode());
+        $this->assertEquals(Movie::REGULAR, $this->regularMovie->getPriceCode());
+        $this->assertEquals(Movie::NEW_RELEASE, $this->newReleaseMovie->getPriceCode());
+        $this->assertEquals(Movie::CHILD, $this->childMovie->getPriceCode());
     }
 }
