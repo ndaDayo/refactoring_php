@@ -31,6 +31,9 @@ class Customer
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function statement()
     {
         $result = 'Rental Point for ' . $this->getName() . "\n";
@@ -44,20 +47,26 @@ class Customer
         return $result;
     }
 
-    private function getTotalCharge()
+    /**
+     * @return int
+     */
+    public function getTotalCharge()
     {
         $result = 0;
         foreach ($this->rentals as $rental) {
-            $result = $rental->getCharge();
+            $result += $rental->getCharge();
         }
         return $result;
     }
 
-    private function getTotalFrequentRentalPoint()
+    /**
+     * @return int
+     */
+    public function getTotalFrequentRentalPoint()
     {
         $result = 0;
         foreach ($this->rentals as $rental) {
-            $result = $rental->getFrequentRentalPoint();
+            $result += $rental->getFrequentRentalPoint();
         }
         return $result;
     }
