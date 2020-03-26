@@ -1,6 +1,9 @@
 <?php
 
+namespace Tests;
+
 use App\Movie;
+use PHPUnit_Framework_TestCase;
 
 class MovieTest extends PHPUnit_Framework_TestCase
 {
@@ -23,7 +26,7 @@ class MovieTest extends PHPUnit_Framework_TestCase
     /**
      *　@test
      */
-    public function 料金コードをセットする()
+    public function testPriceCode()
     {
         $this->assertEquals(Movie::REGULAR, $this->regularMovie->getPriceCode());
         $this->assertEquals(Movie::NEW_RELEASE, $this->newReleaseMovie->getPriceCode());
