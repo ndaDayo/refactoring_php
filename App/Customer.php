@@ -39,7 +39,7 @@ class Customer
         $result = 'Rental Point for ' . $this->getName() . "\n";
 
         foreach ($this->rentals as $rental) {
-            $result .= "\t" . $rental->getMovie()->getTitle() . "\t" . $this->getTotalCharge() . "\n";
+            $result .= "\t" . $rental->getMovie()->getTitle() . "\t" . $rental->getCharge(). "\n";
         }
         $result .= 'Amount owed is ' . $this->getTotalCharge() . "\n";
         $result .= 'You earned ' . $this->getTotalFrequentRentalPoint() . ' frequent renter points' . "\n";
