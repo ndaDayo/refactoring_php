@@ -1,13 +1,14 @@
 <?php
 require 'vendor/autoload.php';
 
-use App\Customer;
-use App\Movie;
-use App\Rental;
+use App\FindInt;
 
-$movie = new Movie('シンドラーのリスト',0);
-$rental = new Rental($movie,7);
-$customer = new Customer('スティーヴン・スピルバーグ');
-$customer->addRental($rental);
+$data = [1, 9, 0, 2, 8, 5, 6, 3, 4, 7];
 
-echo $customer->statement();
+$find = new FindInt();
+
+if ($find->find($data, 5)) {
+    echo "Found" . "\n";
+} else {
+    echo "Not Found" . "\n";
+}
