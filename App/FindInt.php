@@ -5,7 +5,7 @@ namespace App;
 class FindInt
 {
     /** @var boolean */
-    public $flag;
+    public $found;
 
     /**
      * 配列を走査して$targetの有無でbool値を返す
@@ -16,13 +16,14 @@ class FindInt
      */
     public function find(array $data, $target)
     {
-        $this->flag = false;
+        $this->found = false;
 
         for ($i = 0; $i < count($data); $i++) {
             if ($data[$i] === $target) {
-               $this->flag = true;
+               $this->found = true;
+               break;
             }
         }
-        return $this->flag;
+        return $this->found;
     }
 }
