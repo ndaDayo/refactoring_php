@@ -1,0 +1,21 @@
+version: '3'
+# アプリケーションを動かすための各要素をService
+services:
+  php:
+    container_name: refacta_app_php
+    build: ./.docker/php
+    volumes:
+      - .:/var/www
+    environment:
+      TZ: Asia/Tokyo
+
+  nginx:
+    image: nginx:latest
+    container_name: refacta_app_nginx
+    ports:
+      - 8086:80
+    volumes:
+      - .:/var/www
+      - .docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
