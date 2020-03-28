@@ -10,6 +10,7 @@ class Robot
 
     /** @var string */
     public $name;
+
     /**
      * Robot constructor.
      *
@@ -22,21 +23,19 @@ class Robot
 
     /**
      *
-     * @return string
      * @param $command
+     * @return string
      */
     public function order(int $command)
     {
         if ($command === Robot::COMMAND_WALK) {
             return $this->name . 'が歩く' . "\n";
-        }
-
-        if ($command === Robot::COMMAND_STOP) {
-            return $this->name . 'は止まる'. "\n";
-        }
-
-        if ($command === Robot::COMMAND_JUMP) {
+        } elseif ($command === Robot::COMMAND_STOP) {
+            return $this->name . 'は止まる' . "\n";
+        } elseif ($command === Robot::COMMAND_JUMP) {
             return $this->name . 'がジャンプする' . "\n";
+        } else {
+            return $command . 'のコマンドはないですよ' . "\n";
         }
     }
 }
