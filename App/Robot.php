@@ -4,9 +4,12 @@ namespace App;
 
 class Robot
 {
+    const COMMAND_WALK = 0;
+    const COMMAND_STOP = 1;
+    const COMMAND_JUMP = 2;
+
     /** @var string */
     public $name;
-
     /**
      * Robot constructor.
      *
@@ -24,15 +27,15 @@ class Robot
      */
     public function order(int $command)
     {
-        if ($command === 0) {
+        if ($command === Robot::COMMAND_WALK) {
             return $this->name . 'が歩く' . "\n";
         }
 
-        if ($command === 1) {
+        if ($command === Robot::COMMAND_STOP) {
             return $this->name . 'は止まる'. "\n";
         }
 
-        if ($command === 2) {
+        if ($command === Robot::COMMAND_JUMP) {
             return $this->name . 'がジャンプする' . "\n";
         }
     }
