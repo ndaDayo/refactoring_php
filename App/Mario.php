@@ -2,17 +2,19 @@
 
 namespace App;
 
+use App\Status\MarioStatus;
+
 class Mario
 {
-    /** @var string  */
-    private $status = 'normal';
+    /** @var string */
+    private $status;
 
     /**
      * Mario constructor.
      *
      * @param $status
      */
-    public function __construct($status)
+    public function __construct(MarioStatus $status)
     {
         $this->status = $status;
     }
@@ -30,17 +32,7 @@ class Mario
      */
     public function attack()
     {
-        switch ($this->status) {
-            case 'fire':
-                return '燃えろ！クリボー！';
-                break;
-            case 'hammer':
-                return 'ハンマー！';
-                break;
-            default:
-                return '...';
-                break;
-        }
+       return $this->status->attack();
     }
 
     /**
@@ -48,10 +40,6 @@ class Mario
      */
     public function miss()
     {
-        if ($this->status !== 'normal') {
-            return '小さくなる...';
-        }
-
-        return 'GAME　OVER';
+       return $this->status->miss();
     }
 }
